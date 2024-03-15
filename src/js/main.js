@@ -18,6 +18,7 @@ function checkInput() {
 
 //Variabler för elementen i HTML-dokumentet
 const result1El = document.getElementById("result1");
+const result11El = document.getElementById("result11");
 const result2El = document.getElementById("result2");
 const result3El = document.getElementById("result3");
 const errorEl = document.getElementById("error");
@@ -39,7 +40,8 @@ async function searchMovie(movie) {
             const movieActors = data.Actors.split(",").map(actor => actor.trim());
 
             //Skriv ut bild, titel och beskrivning till resultat1
-            result1El.innerHTML = `<img id="movieImage" src=${movieImage} alt="Movie Poster"><h2 id="movieTitle">${movieTitle}</h2><p id="movieGenre">${movieGenre}</p><p id="moviePlot">${moviePlot}</p><p id="buttonInfo">Click on an actor to display the movies they are most known for.</p>`;
+            result1El.innerHTML = `<img id="movieImage" src=${movieImage} alt="Movie Poster">`;
+            result11El.innerHTML = `<h2 id="movieTitle">${movieTitle}</h2><p id="movieGenre">${movieGenre}</p><p id="moviePlot">${moviePlot}</p><p id="buttonInfo">Click on an actor to display the movies they are most known for.</p>`;
 
             //Ta bort tidigare information
             result2El.innerHTML = "";

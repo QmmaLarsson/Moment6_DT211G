@@ -1,3 +1,79 @@
 @use "base";
 @use "component";
 @use "keyframes";
+
+/*Regler för hela webbplatsen*/
+html {
+    /*62,5% av 16px ger 10px*/
+    font-size: 62.5%;
+}
+
+body {
+    /*Textstorlek 16px som standard*/
+    font-size: base.$main-fontsize;
+    line-height: 2.5rem;
+    font-family: base.$font-stack;
+    margin: 0;
+    background-color: base.$primary-bg;
+}
+
+h1 {
+    /*Textstorlek 32px som standard*/
+    @include component.heading-size(1);
+    @extend .h;
+}
+
+h2 {
+    /*Textstorlek 24 som standard*/
+    @include component.heading-size(2);
+    @extend .h;
+}
+
+h3 {
+    /*Textstorlek 20 som standard*/
+    @include component.heading-size(3);
+    @extend .h;
+}
+
+#container1 {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 50% 50%;
+}
+
+#search {
+    grid-area: 1/1/2/3;
+    margin: auto;
+}
+
+#result1 {
+    grid-area: 2/1/3/2;
+    margin: auto;
+}
+
+#container2 {
+    grid-area: 2/2/3/3;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 100%;
+
+    #result11 {
+        grid-area: 1/1/2/2;
+        margin: auto;
+    }
+
+    #result2 {
+        grid-area: 2/1/3/2;
+        margin: auto;
+    }
+
+    #result3 {
+        grid-area: 3/1/4/2;
+        margin: auto;
+    }
+}
+
+#error {
+    grid-area: 3/1/4/3;
+    margin: auto;
+}

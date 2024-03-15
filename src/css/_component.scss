@@ -1,1 +1,23 @@
 @use "base";
+
+//Rubriker
+.h {
+    margin-bottom: 0.5rem;
+}
+
+@mixin heading-size ($size) {
+    @if $size ==1 {
+        /*Textstorlek 32px som standard*/
+        font-size: 3.2rem;
+    }
+
+    @else if $size ==2 {
+        /*Textstorlek 24 som standard*/
+        font-size: 2.4rem;
+    }
+
+    @else {
+        /*Textstorlek 20px som standard*/
+        font-size: 2rem;
+    }
+}
