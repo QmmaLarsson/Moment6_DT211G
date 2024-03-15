@@ -30,10 +30,7 @@ async function searchMovie(movie) {
             const movieImage = data.Poster;
 
             //Skådespelara sparas i en array i variabeln movieActors
-            let movieActors = [];
-            movieActors.length = 0;
-            const actors = data.Actors.split(",").map(actor => actor.trim());
-            Array.prototype.push.apply(movieActors, actors)
+            const movieActors = data.Actors.split(",").map(actor => actor.trim());
 
             //Variabel för resultat1
             const result1El = document.getElementById("result1");
@@ -84,15 +81,26 @@ async function actorSearch() {
             //Variabler
             const movies = data.results[0].known_for;
             const result3El = document.getElementById("result3");
+            const actorsMovies = movies.map(movie => movie.title || movie.name);
 
             ///Ta bort tidigare resultat
             result3El.innerHTML = "";
 
-            movies.forEach(movie => {
-                const actorMovieTitle = movie.title;
+            actorsMovies.forEach((movie, index) => {
+                const movieLink = document.createElement("a");
+                movieLink.textContent = movie;
+                const linkId = `${index}`;
+                movieLink.id = linkId;
+                movieLink.href = "#";
+                result3El.appendChild(movieLink);
+                result3El.appendChild(document.createElement("br"));
 
-                result3El.innerHTML += `<h2>${actorMovieTitle}</h2>`;
+                //Händelsehanterare till knapparna för skådespelarna
+                movieLink.addEventListener("click", function() {
+                    searchMovie(movie);
+                });
             });
+
         } else {
             console.error("Something went wrong.", error);
             document.getElementById("error").innerHTML = "<p>Something went wrong, please try again later.</p>";
