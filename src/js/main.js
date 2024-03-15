@@ -16,6 +16,12 @@ function checkInput() {
     }
 }
 
+//Variabler för elementen i HTML-dokumentet
+const result1El = document.getElementById("result1");
+const result2El = document.getElementById("result2");
+const result3El = document.getElementById("result3");
+const errorEl = document.getElementById("error");
+
 async function searchMovie(movie) {
     try {
         //Fetch-anrop
@@ -32,19 +38,13 @@ async function searchMovie(movie) {
             //Skådespelara sparas i en array i variabeln movieActors
             const movieActors = data.Actors.split(",").map(actor => actor.trim());
 
-            //Variabel för resultat1
-            const result1El = document.getElementById("result1");
-            const result2El = document.getElementById("result2");
-            const result3El = document.getElementById("result3");
-
             //Skriv ut bild, titel och beskrivning till resultat1
-            result1El.innerHTML = `<img src=${movieImage}><h2>${movieTitle}</h2><p>${movieGenre}</p><p>${moviePlot}</p>`;
+            result1El.innerHTML = `<img id="movieImage" src=${movieImage} alt="Movie Poster"><h2 id="movieTitle">${movieTitle}</h2><p id="movieGenre">${movieGenre}</p><p id="moviePlot">${moviePlot}</p><p id="buttonInfo">Click on an actor to display the movies they are most known for.</p>`;
 
-            //Ta bort tidigare knappar
+            //Ta bort tidigare information
             result2El.innerHTML = "";
-
-            //Ta bort tidigare sökresultat
             result3El.innerHTML = "";
+            errorEl.innerHTML = "";
 
             //Skriv ut skådespelarna i form av knappar
             movieActors.forEach((actor, index) => {
@@ -56,16 +56,19 @@ async function searchMovie(movie) {
 
                 //Händelsehanterare till knapparna för skådespelarna
                 actorBtn.addEventListener("click", actorSearch);
+
+                //Töm input-fältet efter sökning
+                searchInputEl.value = "";
             });
 
         } else {
             console.error("Something went wrong.", error);
-            document.getElementById("error").innerHTML = "<p>Something went wrong, please try again later.</p>";
+            error.innerHTML = "<p>Something went wrong, please try again later.</p>";
         }
 
     } catch {
         console.error("Something went wrong.", error);
-        document.getElementById("error").innerHTML = "<p>Something went wrong, please try again later.</p>";
+        error.innerHTML = "<p>Something went wrong, please try again later.</p>";
     }
 }
 
@@ -74,40 +77,39 @@ async function actorSearch() {
     //Hämta namnet på skådespelaren från knappen
     const actor = this.textContent;
     try {
+        //Fetch-anrop
         const response = await fetch(`https://api.themoviedb.org/3/search/person?api_key=5980c8441267fa0280955a5da15fe080&query=${actor}`);
         const data = await response.json();
 
         if (data.Response = "True") {
-            //Variabler
+            //Variabler för filmerna skådespelaren är mest känd för
             const movies = data.results[0].known_for;
-            const result3El = document.getElementById("result3");
             const actorsMovies = movies.map(movie => movie.title || movie.name);
 
-            ///Ta bort tidigare resultat
+            //Ta bort tidigare resultat
             result3El.innerHTML = "";
 
-            actorsMovies.forEach((movie, index) => {
+            //Skriv ut filmerna i form av länkar
+            actorsMovies.forEach((movie) => {
                 const movieLink = document.createElement("a");
                 movieLink.textContent = movie;
-                const linkId = `${index}`;
-                movieLink.id = linkId;
                 movieLink.href = "#";
                 result3El.appendChild(movieLink);
                 result3El.appendChild(document.createElement("br"));
 
-                //Händelsehanterare till knapparna för skådespelarna
-                movieLink.addEventListener("click", function() {
+                //Händelsehanterare till länkarna för filmerna
+                movieLink.addEventListener("click", function () {
                     searchMovie(movie);
                 });
             });
 
         } else {
             console.error("Something went wrong.", error);
-            document.getElementById("error").innerHTML = "<p>Something went wrong, please try again later.</p>";
+            error.innerHTML = "<p>Something went wrong, please try again later.</p>";
         }
 
     } catch (error) {
         console.error("Something went wrong.", error);
-        document.getElementById("error").innerHTML = "<p>Something went wrong, please try again later.</p>";
+        error.innerHTML = "<p>Something went wrong, please try again later.</p>";
     }
 }
