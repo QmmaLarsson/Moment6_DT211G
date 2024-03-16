@@ -11,8 +11,8 @@ html {
 body {
     /*Textstorlek 20px som standard*/
     font-size: base.$main-fontsize;
-    line-height: 2.5rem;
     font-family: base.$font-stack;
+    line-height: 1.5;
     margin: 0;
     background-color: base.$primary-bg;
     color: base.$white;
@@ -220,5 +220,12 @@ h3 {
         #movieImage {
             max-width: 250px;
         }
+    }
+
+    #container2 {
+        box-shadow: none;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        padding-bottom: 0.5rem;
     }
 }
