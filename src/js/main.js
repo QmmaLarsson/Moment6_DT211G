@@ -1,4 +1,5 @@
 "use strict";
+
 //Variabler för sökfunktion
 const searchBtnEl = document.getElementById("searchBtn");
 const searchInputEl = document.getElementById("searchInput");
@@ -18,6 +19,7 @@ function checkInput() {
 
 //Variabler för elementen i HTML-dokumentet
 const result1El = document.getElementById("result1");
+const container2El = document.getElementById("container2");
 const result11El = document.getElementById("result11");
 const result2El = document.getElementById("result2");
 const result3El = document.getElementById("result3");
@@ -41,7 +43,8 @@ async function searchMovie(movie) {
 
             //Skriv ut bild, titel och beskrivning till resultat1
             result1El.innerHTML = `<img id="movieImage" src=${movieImage} alt="Movie Poster">`;
-            result11El.innerHTML = `<h2 id="movieTitle">${movieTitle}</h2><p id="movieGenre">${movieGenre}</p><p id="moviePlot">${moviePlot}</p><p id="buttonInfo">Click on an actor to display the movies they are most known for.</p>`;
+            result11El.innerHTML = `<h2 id="movieTitle">${movieTitle}</h2><p id="movieGenre">${movieGenre}</p><p id="moviePlot">${moviePlot}</p><p id="buttonInfo">Click on an actor to display some of the movies they are most known for.</p>`;
+            container2El.style.display  = "grid";
 
             //Ta bort tidigare information
             result2El.innerHTML = "";
@@ -53,7 +56,7 @@ async function searchMovie(movie) {
                 const actorBtn = document.createElement("button");
                 actorBtn.textContent = actor;
                 const btnId = `${index}`;
-                actorBtn.id = btnId;
+                actorBtn.class = btnId;
                 result2El.appendChild(actorBtn);
 
                 //Händelsehanterare till knapparna för skådespelarna

@@ -1,1 +1,59 @@
 @use "base";
+
+//Keyframe för neonram
+@keyframes neon {
+    0% {
+        box-shadow: 0 0 10px base.$neon;
+    }
+
+    50% {
+        box-shadow: 0 0 20px base.$neon;
+    }
+
+    100% {
+        box-shadow: 0 0 50px base.$neon;
+    }
+}
+
+@-webkit-keyframes neon {
+    0% {
+        box-shadow: 0 0 10px base.$neon;
+    }
+
+    50% {
+        box-shadow: 0 0 20px base.$neon;
+    }
+
+    100% {
+        box-shadow: 0 0 50px base.$neon;
+    }
+}
+
+//Keyframe för logotyp
+@keyframes logoMove1 {
+    0% {
+        transform: translate(-100px);
+    }
+
+    33% {
+        transform: translate(-100px);
+    }
+
+    100% {
+        transform: translate(0px);
+    }
+}
+
+@keyframes logoMove2 {
+    0% {
+        transform: translate(100px);
+    }
+
+    33% {
+        transform: translate(100px);
+    }
+
+    100% {
+        transform: translate(0px);
+    }
+}

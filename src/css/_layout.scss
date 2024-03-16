@@ -15,6 +15,14 @@ body {
     font-family: base.$font-stack;
     margin: 0;
     background-color: base.$primary-bg;
+    color: base.$white;
+    min-height: 80vh;
+    margin: 5vh;
+    padding: 5vh;
+    border-color: base.$neon;
+    box-shadow: 0 0 10px base.$neon;
+    animation: neon 5s ease-in-out infinite alternate;
+    -webkit-animation: neon 5s ease-in-out infinite alternate;
 }
 
 h1 {
@@ -38,42 +46,166 @@ h3 {
 #container1 {
     display: grid;
     grid-template-rows: auto;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 10% 40% 40% 10%;
+}
+
+#logo1 {
+    grid-area: 1/2/2/4;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    animation: logoMove1 3s ease-in-out;
+}
+
+#logo2 {
+    grid-area: 1/2/2/4;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    animation: logoMove2 3s ease-in-out;
+}
+
+#starttext {
+    grid-area: 2/1/3/5;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    box-shadow: base.$primary-shadow;
 }
 
 #search {
-    grid-area: 1/1/2/3;
+    grid-area: 3/1/4/5;
     margin: auto;
+
+    #searchInput {
+        background-color: base.$primary-bg;
+        border-color: base.$neon;
+        border-style: solid;
+        font-size: base.$main-fontsize;
+        color: base.$neon;
+        padding: 1rem;
+        box-shadow: inset 0 0 0.5rem base.$neon, 0 0 0.5rem base.$neon;
+        margin-bottom: 2rem
+    }
+
+    #searchBtn {
+        @extend .buttons;
+        margin-bottom: 2rem;
+    }
 }
 
 #result1 {
-    grid-area: 2/1/3/2;
-    margin: auto;
+    grid-area: 4/2/5/3;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+
+    #movieImage {
+        box-shadow: base.$primary-shadow;
+        max-width: 300px;
+    }
 }
 
 #container2 {
-    grid-area: 2/2/3/3;
-    display: grid;
+    grid-area: 4/3/5/4;
+    display: none;
     grid-template-rows: auto;
     grid-template-columns: 100%;
+    box-shadow: base.$primary-shadow;
+    margin-top: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
+    background-color: base.$primary-bg;
+}
 
-    #result11 {
-        grid-area: 1/1/2/2;
-        margin: auto;
+#result11 {
+    grid-area: 1/1/2/2;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#result2 {
+    grid-area: 2/1/3/2;
+    margin-right: auto;
+
+    button {
+        @extend .buttons;
     }
+}
 
-    #result2 {
-        grid-area: 2/1/3/2;
-        margin: auto;
-    }
+#result3 {
+    grid-area: 3/1/4/2;
+    margin-right: auto;
 
-    #result3 {
-        grid-area: 3/1/4/2;
-        margin: auto;
+    a {
+        color: base.$white;
     }
 }
 
 #error {
-    grid-area: 3/1/4/3;
+    grid-area: 5/1/6/5;
     margin: auto;
+}
+
+/*Regler för skärmstorlekar med en maxbredd på 1024px. Detta för att anpassa webbplatsen till framförallt surfplattor.*/
+@media screen and (max-width: 1024px) {
+    #container1 {
+        grid-template-columns: 5% 90% 5%;
+    }
+
+    #logo1 {
+        grid-area: 1/2/2/3;
+    }
+
+    #logo2 {
+        grid-area: 1/2/2/3;
+    }
+
+    #starttext {
+        grid-area: 2/2/3/3;
+    }
+
+    #search {
+        grid-area: 3/2/4/3;
+    }
+
+    #result1 {
+        grid-area: 4/2/5/3;
+    }
+
+    #container2 {
+        grid-area: 5/2/6/3;
+    }
+
+    #error {
+        grid-area: 6/2/7/3;
+        margin: auto;
+    }
+}
+
+/*Regler för skärmstorlekar med en maxbredd på 700px. Detta för att anpassa webbplatsen till framförallt mobiltelefoner.*/
+@media screen and (max-width: 700px) {
+    body {
+        min-height: 88vh;
+        margin: 3vh;
+        padding: 3vh;
+    }
+
+    #logo1 {
+        width: 250px;
+    }
+
+    #logo2 {
+        width: 250px;
+    }
+
+    #result1 {
+        #movieImage {
+            max-width: 250px;
+        }
+    }
 }
