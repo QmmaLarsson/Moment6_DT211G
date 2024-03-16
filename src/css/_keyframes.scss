@@ -44,6 +44,20 @@
     }
 }
 
+@-webkit-keyframes logoMove1 {
+    0% {
+        transform: translate(-100px);
+    }
+
+    33% {
+        transform: translate(-100px);
+    }
+
+    100% {
+        transform: translate(0px);
+    }
+}
+
 @keyframes logoMove2 {
     0% {
         transform: translate(100px);
@@ -55,5 +69,78 @@
 
     100% {
         transform: translate(0px);
+    }
+}
+
+@-webkit-keyframes logoMove2 {
+    0% {
+        transform: translate(100px);
+    }
+
+    33% {
+        transform: translate(100px);
+    }
+
+    100% {
+        transform: translate(0px);
+    }
+}
+
+/*Regler för skärmstorlekar med en maxbredd på 900px. Detta för att anpassa animationen till mindre skärmar.*/
+@media screen and (max-width: 900px) {
+    @keyframes logoMove1 {
+        0% {
+            transform: translate(-30px);
+        }
+    
+        33% {
+            transform: translate(-30px);
+        }
+    
+        100% {
+            transform: translate(0px);
+        }
+    }
+    
+    @-webkit-keyframes logoMove1 {
+        0% {
+            transform: translate(-30px);
+        }
+    
+        33% {
+            transform: translate(-30px);
+        }
+    
+        100% {
+            transform: translate(0px);
+        }
+    }
+    
+    @keyframes logoMove2 {
+        0% {
+            transform: translate(30px);
+        }
+    
+        33% {
+            transform: translate(30px);
+        }
+    
+        100% {
+            transform: translate(0px);
+        }
+    }
+    
+    @-webkit-keyframes logoMove2 {
+        0% {
+            transform: translate(30px);
+        }
+    
+        33% {
+            transform: translate(30px);
+        }
+    
+        100% {
+            transform: translate(0px);
+        }
     }
 }

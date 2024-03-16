@@ -31,11 +31,15 @@ async function searchMovie(movie) {
         const response = await fetch(`https://www.omdbapi.com/?t=${movie}&plot=full&apikey=d68ae12b`);
         const data = await response.json();
 
+        https://www.omdbapi.com/?t=barbie&plot=full&apikey=d68ae12b
+
         if (data.Response === "True") {
             //Variabler för titel, beskrivning och bild
             const movieTitle = data.Title;
+            const movieYear = data.Year;
             const movieGenre = data.Genre;
             const moviePlot = data.Plot;
+            const movieDirector = data.Director;
             const movieImage = data.Poster;
 
             //Skådespelara sparas i en array i variabeln movieActors
@@ -43,13 +47,16 @@ async function searchMovie(movie) {
 
             //Skriv ut bild, titel och beskrivning till resultat1
             result1El.innerHTML = `<img id="movieImage" src=${movieImage} alt="Movie Poster">`;
-            result11El.innerHTML = `<h2 id="movieTitle">${movieTitle}</h2><p id="movieGenre">${movieGenre}</p><p id="moviePlot">${moviePlot}</p><p id="buttonInfo">Click on an actor to display some of the movies they are most known for.</p>`;
-            container2El.style.display  = "grid";
+            result11El.innerHTML = `<h1 id="movieTitle">${movieTitle} (${movieYear})</h1><p id="movieGenre">${movieGenre}</p><p id="moviePlot">${moviePlot}</p><p><b>Director</b></p><p id="movieDirector">${movieDirector}</p>`;
+            container2El.style.display = "grid";
 
             //Ta bort tidigare information
             result2El.innerHTML = "";
             result3El.innerHTML = "";
             errorEl.innerHTML = "";
+
+            //Skriv ut rubrik
+            result2El.innerHTML = `<p><b>Actors<b></p>`;
 
             //Skriv ut skådespelarna i form av knappar
             movieActors.forEach((actor, index) => {
@@ -65,6 +72,8 @@ async function searchMovie(movie) {
                 //Töm input-fältet efter sökning
                 searchInputEl.value = "";
             });
+
+            result3El.innerHTML = `<p id="buttonInfo">Click on an actor to display some of the movies they are most known for.</p>`;
 
         } else {
             console.error("Something went wrong.", error);

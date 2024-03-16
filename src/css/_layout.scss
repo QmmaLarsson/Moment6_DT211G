@@ -9,7 +9,7 @@ html {
 }
 
 body {
-    /*Textstorlek 16px som standard*/
+    /*Textstorlek 20px som standard*/
     font-size: base.$main-fontsize;
     line-height: 2.5rem;
     font-family: base.$font-stack;
@@ -72,7 +72,7 @@ h3 {
     margin-left: auto;
     margin-right: auto;
     padding: 10px;
-    box-shadow: base.$primary-shadow;
+    text-align: center;
 }
 
 #search {
@@ -87,7 +87,8 @@ h3 {
         color: base.$neon;
         padding: 1rem;
         box-shadow: inset 0 0 0.5rem base.$neon, 0 0 0.5rem base.$neon;
-        margin-bottom: 2rem
+        margin-bottom: 2rem;
+        max-width: 300px
     }
 
     #searchBtn {
@@ -126,6 +127,10 @@ h3 {
     grid-area: 1/1/2/2;
     margin-left: auto;
     margin-right: auto;
+
+    #movieDirector {
+        margin-bottom: 0;
+    }
 }
 
 #result2 {
@@ -190,6 +195,8 @@ h3 {
 /*Regler för skärmstorlekar med en maxbredd på 700px. Detta för att anpassa webbplatsen till framförallt mobiltelefoner.*/
 @media screen and (max-width: 700px) {
     body {
+        /*Font-size 16 på mobil*/
+        font-size: base.$mobile-fontsize;
         min-height: 88vh;
         margin: 3vh;
         padding: 3vh;
