@@ -18,9 +18,9 @@ function checkInput() {
 }
 
 //Variabler för elementen i HTML-dokumentet
-const result1El = document.getElementById("result1");
+const resultEl = document.getElementById("result");
 const container2El = document.getElementById("container2");
-const result11El = document.getElementById("result11");
+const result1El = document.getElementById("result1");
 const result2El = document.getElementById("result2");
 const result3El = document.getElementById("result3");
 const errorEl = document.getElementById("error");
@@ -31,10 +31,9 @@ async function searchMovie(movie) {
         const response = await fetch(`https://www.omdbapi.com/?t=${movie}&plot=full&apikey=d68ae12b`);
         const data = await response.json();
 
-        https://www.omdbapi.com/?t=barbie&plot=full&apikey=d68ae12b
-
         if (data.Response === "True") {
-            //Variabler för titel, beskrivning och bild
+
+            //Variabler för titel, utgivningsår, genre, beskrivning, regissör och bild
             const movieTitle = data.Title;
             const movieYear = data.Year;
             const movieGenre = data.Genre;
@@ -45,9 +44,15 @@ async function searchMovie(movie) {
             //Skådespelara sparas i en array i variabeln movieActors
             const movieActors = data.Actors.split(",").map(actor => actor.trim());
 
-            //Skriv ut bild, titel och beskrivning till resultat1
-            result1El.innerHTML = `<img id="movieImage" src=${movieImage} alt="Movie Poster">`;
-            result11El.innerHTML = `<h1 id="movieTitle">${movieTitle} (${movieYear})</h1><p id="movieGenre">${movieGenre}</p><p id="moviePlot">${moviePlot}</p><p><b>Director</b></p><p id="movieDirector">${movieDirector}</p>`;
+            //Skapa en picture-tagg med olika källor för olika format
+            const movieImageEl = document.createElement('picture');
+            movieImageEl.innerHTML = `<source srcset="${movieImage}?as=avif&width=300" type="image/avif"><source srcset="${movieImage}?as=webp&width=300" type="image/webp"><source srcset="${movieImage}?width=300" type="image/jpeg"><img id="movieImage" src="${movieImage}?width=300" alt="Movie Poster">`;
+            resultEl.appendChild(movieImageEl);
+
+            //resultEl.innerHTML = `<img id="movieImage" src=${movieImage} alt="Movie Poster">`;
+
+            //Skriv ut information om film
+            result1El.innerHTML = `<h1 id="movieTitle">${movieTitle} (${movieYear})</h1><p id="movieGenre">${movieGenre}</p><p id="moviePlot">${moviePlot}</p><p><b>Director</b></p><p id="movieDirector">${movieDirector}</p>`;
             container2El.style.display = "grid";
 
             //Ta bort tidigare information
