@@ -44,12 +44,13 @@ async function searchMovie(movie) {
             //Skådespelara sparas i en array i variabeln movieActors
             const movieActors = data.Actors.split(",").map(actor => actor.trim());
 
+            //Ta bort tidigare information
+            resultEl.innerHTML = "";
+            
             //Skapa en picture-tagg med olika källor för olika format
             const movieImageEl = document.createElement('picture');
             movieImageEl.innerHTML = `<source srcset="${movieImage}?as=avif&width=300" type="image/avif"><source srcset="${movieImage}?as=webp&width=300" type="image/webp"><source srcset="${movieImage}?width=300" type="image/jpeg"><img id="movieImage" src="${movieImage}?width=300" alt="Movie Poster">`;
             resultEl.appendChild(movieImageEl);
-
-            //resultEl.innerHTML = `<img id="movieImage" src=${movieImage} alt="Movie Poster">`;
 
             //Skriv ut information om film
             result1El.innerHTML = `<h1 id="movieTitle">${movieTitle} (${movieYear})</h1><p id="movieGenre">${movieGenre}</p><p id="moviePlot">${moviePlot}</p><p><b>Director</b></p><p id="movieDirector">${movieDirector}</p>`;
